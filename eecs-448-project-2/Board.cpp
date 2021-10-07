@@ -1,4 +1,5 @@
 #include "Board.h"
+#include "UserInteraction.h"
 
 Board::Board()
 {
@@ -7,9 +8,7 @@ Board::Board()
   m_shipsSunk = 0;
 }
 
-
 Board::~Board(){}
-
 
 void Board::viewBoard(bool asOpponent)
 {
@@ -21,7 +20,7 @@ void Board::viewBoard(bool asOpponent)
   {
     cout << '|' << x + 1 << ' ';
 
-    for(int y = 0; y < COLS; y++){
+    for(int y = 0; y < COLS; y++) {
       if(asOpponent && m_grid[x][y].getChar() == SHIP)
         // Hide enemy ships
         cout << BLANK;
@@ -79,12 +78,14 @@ void Board::shipPlacement(int numShips)
       {
         m_grid[m_row][m_col+j].placeShip();
         m_grid[m_row][m_col+j].setOrientation(isHorizontal);
+        m_grid[m_row][m_col+j].setSize(i);
       }
     else
       for (int j = 0; j < i; j++)
       {
         m_grid[m_row+j][m_col].placeShip();
         m_grid[m_row+j][m_col].setOrientation(isHorizontal);
+        m_grid[m_row+j][m_col].setSize(i);
       }
 
     system("clear");
@@ -135,17 +136,21 @@ void Board::randomShipPlacement(int numShips){
 
 void Board::fireAt()
 {
+    doScoreboard = false;
   while(true)
   {
     promptForCoordinate();
+    if(doScoreboard){break;}
 
     if (m_grid[m_row][m_col].hitShip())
       break;
 
-    cout << "This spot has already bit hit. Try again.\n";
+    cout << "This spot has already been hit. Try again.\n";
   }
-
-  if (m_grid[m_row][m_col].isShip())
+  if(doScoreboard)
+  {
+      return;
+  } else if (m_grid[m_row][m_col].isShip())
   {
     cout << "You hit an enemy ship!\n";
 
@@ -157,10 +162,9 @@ void Board::fireAt()
 
     if (hasLost())
       cout << "You have sunk all of your enemy's ships!\n";
+  } else {
+      cout << "\nYou missed.\n";
   }
-  else
-    cout << "\nYou missed.\n";
-
 }
 
 void Board::firedAtByAi(int difficulty)
@@ -202,13 +206,16 @@ void Board::firedAtByAi(int difficulty)
 void Board::promptForCoordinate()
 {
   validInput = false;
-
   do
   {
-    cout << "Choose a Coordinate: ";
+    cout << "Choose a Coordinate or view Scoreboard [sb]: ";
     cin >> userInput;
 
-    if(userInput.length() == 2)
+    // check for scoreboard input flag
+    if(userInput == "sb" || userInput == "sB" || userInput == "Sb" || userInput == "SB") {
+        doScoreboard = true;
+        return;
+    } else if(userInput.length() == 2)
     {
       m_col = int(userInput.at(0));
       m_row = int(userInput.at(1));
@@ -459,3 +466,21 @@ bool Board::hasLost()
 {
   return m_shipsSunk == m_numShips;
 }
+
+
+
+bool Board::getBoardState(int index)
+{
+    bool hitShipsBySize[6];
+    for(int i = 0; i < ROWS; i++)
+    {
+        for(int j = 0; j < COLS; j++)
+        {
+            if(isSunk(i,j))
+                hitShipsBySize[m_grid[i][j].getSize() - 1] = true;
+        }
+    }
+
+    return hitShipsBySize[index];
+}
+

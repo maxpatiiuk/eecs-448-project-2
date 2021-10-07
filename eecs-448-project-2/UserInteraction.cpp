@@ -1,4 +1,5 @@
 #include "UserInteraction.h"
+#include "Board.h"
 
 UserInteraction::UserInteraction()
 {
@@ -7,13 +8,11 @@ UserInteraction::UserInteraction()
   numShips = 0;
 }
 
-
 UserInteraction::~UserInteraction()
 {
   delete player1;
   delete player2;
 }
-
 
 int UserInteraction::promptForInt(int min, int max)
 {
@@ -96,7 +95,14 @@ void UserInteraction::playGame()
       opponent->viewBoard(true);
 
       cout << "\nWhere do you wish to fire?\n";
-      opponent->fireAt();
+
+      do {
+        opponent->fireAt();
+        if(opponent->doScoreboard)
+        {
+            viewScores();
+        }
+      } while(opponent->doScoreboard);
 
       cin.ignore();
     }
@@ -112,6 +118,60 @@ void UserInteraction::playGame()
     cout << "\nPlayer " << currentPlayer << " wins!\n\n";
 }
 
+void UserInteraction::viewScores()
+{
+    int p1SunkShips = player1->getSunkShips();
+    int p2SunkShips = player2->getSunkShips();
+
+    string gameState;
+    if(p1SunkShips > p2SunkShips)
+        gameState = "|        Player 1 is winning!         |";
+    else if(p1SunkShips < p2SunkShips)
+        gameState = "|        Player 2 is winning!         |";
+    else
+        gameState = "|           It is a draw...           |";
+
+    system("clear");
+    cout << "---------------------------------------\n"
+         << gameState + "\n"
+         << "|-------------------------------------|\n"
+         << "|           |     P1     |     P2     |\n"
+         << "|-------------------------------------|\n"
+         << "| Ships Sunk|     " + to_string(p1SunkShips) + "      |     " + to_string(p2SunkShips) + "      |\n"
+         << "|-------------------------------------|\n";
+
+    for(int i = 0; i < numShips; i++)
+    {
+        cout << "|           | ";
+        for(int j = 0; j <= i && i < 6; j++)
+        {
+            if(player1->getBoardState(i))
+                cout << "X";
+            else
+                cout << "#";
+        }
+        for(int j = i; j < 6; j++)
+        {
+            cout << " ";
+        }
+        cout << "    | ";
+        for(int j = 0; j <= i && i < 12; j++)
+        {
+            if(player2->getBoardState(i))
+                cout << "X";
+            else
+                cout << "#";
+        }
+        for(int j = i; j < 6; j++)
+        {
+            cout << " ";
+        }
+        cout << "    |";
+        cout << "\n";
+    }
+
+    cout << "|-------------------------------------|\n";
+}
 
 void UserInteraction::run()
 {

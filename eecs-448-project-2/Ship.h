@@ -20,6 +20,8 @@ private:
    */
   char m_char;
 
+  int shipSize;
+
   /*
    * Checks to see whether or not the coordinate contains a ship
    * @param None
@@ -78,6 +80,13 @@ public:
    * @param bool isHorizontal
    */
   void setOrientation(bool isHorizontal);
+
+  void setSize(int size);
+
+  int getSize()
+  {
+      return shipSize;
+  }
 
   bool isHorizontal();
 

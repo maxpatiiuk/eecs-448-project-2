@@ -34,6 +34,11 @@ void Ship::setOrientation(bool isHorizontal)
   m_isHorizontal = isHorizontal;
 }
 
+void Ship::setSize(int size)
+{
+    shipSize = size;
+}
+
 bool Ship::isHorizontal()
 {
   return m_isHorizontal;

@@ -5,6 +5,7 @@
 #include <limits>
 #include "Board.h"
 #include <iostream>
+
 using namespace std;
 
 class UserInteraction
@@ -52,6 +53,8 @@ public:
    * @param None
    */
   void playGame();
+
+  void viewScores();
 
   /*
    * Is called from main.cpp to start the game

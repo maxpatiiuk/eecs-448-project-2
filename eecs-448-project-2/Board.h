@@ -68,6 +68,9 @@ public:
    */
   void viewBoard(bool asOpponent);
 
+
+  void viewScores();
+
   /*
    * Ship is placed on the board
    * @param number of ships
@@ -126,6 +129,21 @@ public:
    * @return boolean value for win status
    */
   bool hasLost();
+
+  //getter methods
+  int getNumShips()
+  {
+      return m_numShips;
+  };
+
+  int getSunkShips()
+  {
+      return m_shipsSunk;
+  };
+
+  bool getBoardState(int index);
+
+  bool doScoreboard;
 
 };
 
