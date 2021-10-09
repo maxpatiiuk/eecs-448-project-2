@@ -10,7 +10,7 @@ Board::Board()
 
 Board::~Board(){}
 
-void Board::viewBoard(bool asOpponent)
+void Board::viewThisBoard()
 {
   cout
     << "------------------------\n"
@@ -21,11 +21,7 @@ void Board::viewBoard(bool asOpponent)
     cout << '|' << x + 1 << ' ';
 
     for(int y = 0; y < COLS; y++) {
-      if(asOpponent && m_grid[x][y].getChar() == SHIP)
-        // Hide enemy ships
-        cout << BLANK;
-      else
-        cout << m_grid[x][y].getChar();
+      cout << m_grid[x][y].getChar();
       cout << ' ';
     }
 
@@ -42,7 +38,7 @@ void Board::shipPlacement(int numShips)
   for (int i = 1; i <= m_numShips; i++)
   {
     // Show player their current board with ship placements
-    viewBoard(false);
+    viewThisBoard();
 
     // choose horizontal or vertical ship placement
     if (i != 1)
@@ -92,7 +88,7 @@ void Board::shipPlacement(int numShips)
   }
 
   cout << "Here is your final ship placement:\n";
-  viewBoard(false);
+  viewThisBoard();
   cout << "\nPress ENTER to Continue ";
   cin.ignore();
   cin.ignore();
@@ -113,7 +109,7 @@ void Board::randomShipPlacement(int numShips){
         continue;
 
       char orientation = validHorizontally ? HORIZONTAL : VERTICAL;
-      if(validHorizontally && validHorizontally && rand() % 2)
+      if(validHorizontally && rand() % 2)
         orientation = VERTICAL;
 
       if (orientation == HORIZONTAL)
@@ -136,21 +132,16 @@ void Board::randomShipPlacement(int numShips){
 
 void Board::fireAt()
 {
-    doScoreboard = false;
   while(true)
   {
     promptForCoordinate();
-    if(doScoreboard){break;}
 
     if (m_grid[m_row][m_col].hitShip())
       break;
 
     cout << "This spot has already been hit. Try again.\n";
   }
-  if(doScoreboard)
-  {
-      return;
-  } else if (m_grid[m_row][m_col].isShip())
+  if (m_grid[m_row][m_col].isShip())
   {
     cout << "You hit an enemy ship!\n";
 
@@ -208,14 +199,10 @@ void Board::promptForCoordinate()
   validInput = false;
   do
   {
-    cout << "Choose a Coordinate or view Scoreboard [sb]: ";
+    cout << "Choose a coordinate: ";
     cin >> userInput;
 
-    // check for scoreboard input flag
-    if(userInput == "sb" || userInput == "sB" || userInput == "Sb" || userInput == "SB") {
-        doScoreboard = true;
-        return;
-    } else if(userInput.length() == 2)
+    if(userInput.length() == 2)
     {
       m_col = int(userInput.at(0));
       m_row = int(userInput.at(1));
@@ -377,7 +364,7 @@ bool Board::checkValidShipPlacement(int shipSize, bool horizontal)
     }
   }
 
-  if (validInput == false)
+  if (!validInput)
   {
     cout << "ERROR: " << invalidCoordMessage << "\n\n";
   }
@@ -403,12 +390,12 @@ bool Board::isSunk(int row, int col)
   if(!m_grid[m_row][m_col].isShip())
     return false;
 
-  if(m_grid[row][col].isHorizontal() == true)
+  if(m_grid[row][col].isHorizontal())
   {
     temp = col;
     while (m_grid[row][temp].isShip())
     {
-      if (m_grid[row][temp].hasBeenHit() == false)
+      if (!m_grid[row][temp].hasBeenHit())
         return false;
 
       temp--;
@@ -420,7 +407,7 @@ bool Board::isSunk(int row, int col)
     temp = col;
     while (m_grid[row][temp].isShip())
     {
-      if (m_grid[row][temp].hasBeenHit() == false)
+      if (!m_grid[row][temp].hasBeenHit())
         return false;
 
       temp++;
@@ -436,7 +423,7 @@ bool Board::isSunk(int row, int col)
     temp = row;
     while (m_grid[temp][col].isShip())
     {
-      if (m_grid[temp][col].hasBeenHit() == false)
+      if (!m_grid[temp][col].hasBeenHit())
         return false;
 
       temp--;
@@ -448,7 +435,7 @@ bool Board::isSunk(int row, int col)
     temp = row;
     while (m_grid[temp][col].isShip())
     {
-      if (m_grid[temp][col].hasBeenHit() == false)
+      if (!m_grid[temp][col].hasBeenHit())
         return false;
 
       temp++;
@@ -467,20 +454,8 @@ bool Board::hasLost()
   return m_shipsSunk == m_numShips;
 }
 
-
-
-bool Board::getBoardState(int index)
+char Board::getShipGridChar(int x, int y)
 {
-    bool hitShipsBySize[6];
-    for(int i = 0; i < ROWS; i++)
-    {
-        for(int j = 0; j < COLS; j++)
-        {
-            if(isSunk(i,j))
-                hitShipsBySize[m_grid[i][j].getSize() - 1] = true;
-        }
-    }
-
-    return hitShipsBySize[index];
+    return m_grid[x][y].getChar();
 }
 
