@@ -4,6 +4,9 @@
 #include <cstdlib>
 #include <limits>
 #include <stdlib.h>
+#include <tuple>
+#include <vector>
+
 #include "Ship.h"
 
 #define ROWS 9
@@ -37,12 +40,8 @@ private:
   int m_shipsSunk;
 
   //used by medium difficulty to track status
-  int m_targetRow;
-  int m_targetCol;
-  int originRow;
-  int originCol;
-  bool isTargeting;
-  int targetDirection;
+  int m_aiRow;
+  int m_aiCol;
 
   // String to store user input
   string userInput;

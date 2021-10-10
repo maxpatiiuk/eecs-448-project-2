@@ -6,6 +6,8 @@ Board::Board()
   srand(time(nullptr));
   m_numShips = 0;
   m_shipsSunk = 0;
+  m_aiRow = -1;
+  m_aiCol = -1;
 }
 
 Board::~Board(){}
@@ -167,55 +169,72 @@ void Board::firedAtByAi(int difficulty)
     } while(m_grid[m_row][m_col].hasBeenHit());
 
   else if(difficulty == MEDIUM){
-    if(!isTargeting){
-      do
-      {
-        originRow = rand() % ROWS;
-        originCol = rand() % COLS;
-      } while(m_grid[originRow][originCol].getChar() != BLANK);
-      if(m_grid[originRow][originCol].hitShip())
-      {
-        isTargeting = true;
-        m_targetRow = originRow;
-        m_targetCol = originCol;
+    if(m_aiRow == -1 || m_aiCol == -1){
+      // Search for un-hit coordinate
+      do {
+        m_row=rand()%ROWS;
+        m_col=rand()%COLS;
+      } while(m_grid[m_row][m_col].hasBeenHit());
+      if(m_grid[m_row][m_col].getChar() == SHIP){
+        // if ship was hit, remember the position
+        m_aiRow = m_row;
+        m_aiCol = m_col;
       }
     } else {
-      int rowOffset = 0;
-      int colOffset = 0;
-      do{
-        targetDirection = rand() % 4;
-        bool isValidDir = false;
-        while(!isValidDir){
-          if(targetDirection == 0){
-            rowOffset -= 1;
-          } 
-          else if(targetDirection == 1){
-            rowOffset += 1;
-          }
-          else if(targetDirection == 2){
-            colOffset -= 1;
-          }
-          else if(targetDirection == 3){
-            colOffset += 1;
+
+      // determine if ship is horizontal or vertical
+      bool hasShipAbove = isOnGrid(m_aiRow - 1, m_aiCol)
+        && m_grid[m_aiRow - 1][m_aiCol].getChar() == HIT;
+      bool hasShipBelow = isOnGrid(m_aiRow + 1, m_aiCol)
+        && m_grid[m_aiRow + 1][m_aiCol].getChar() == HIT;
+      bool hasShipToLeft = isOnGrid(m_aiRow, m_aiCol - 1)
+        && m_grid[m_aiRow][m_aiCol - 1].getChar() == HIT;
+      bool hasShipToRight = isOnGrid(m_aiRow, m_aiCol + 1)
+        && m_grid[m_aiRow][m_aiCol + 1].getChar() == HIT;
+      bool isVertical = hasShipBelow || hasShipAbove;
+      bool isHorizontal = hasShipToLeft || hasShipToRight;
+
+      // if can't determine ship's orientation, shot around it randomly
+      if(!isHorizontal && !isVertical){
+        vector<tuple<int, int>> neighbors;
+        if(isOnGrid(m_aiRow + 1, m_aiCol)
+          && !m_grid[m_aiRow + 1][m_aiCol].hasBeenHit())
+          neighbors.push_back({m_aiRow + 1, m_aiCol});
+        if(isOnGrid(m_aiRow - 1, m_aiCol)
+          && !m_grid[m_aiRow - 1][m_aiCol].hasBeenHit())
+          neighbors.push_back({m_aiRow - 1, m_aiCol});
+        if(isOnGrid(m_aiRow, m_aiCol - 1)
+          && !m_grid[m_aiRow][m_aiCol - 1].hasBeenHit())
+          neighbors.push_back({m_aiRow, m_aiCol - 1});
+        if(isOnGrid(m_aiRow, m_aiCol + 1)
+          && !m_grid[m_aiRow][m_aiCol + 1].hasBeenHit())
+          neighbors.push_back({m_aiRow , m_aiCol + 1});
+
+        tuple<int, int> coords = neighbors.at(rand() % neighbors.size());
+        m_row = get<0>(coords);
+        m_col = get<1>(coords);
+      }
+      else {
+        m_col = m_aiCol;
+        m_row = m_aiRow;
+        while(isOnGrid(m_row, m_col) && m_grid[m_row][m_col].getChar() == HIT){
+          if(isVertical)
+            m_row++;
+          else
+            m_col++;
+        }
+        if(!isOnGrid(m_row, m_col) || m_grid[m_row][m_col].getChar() == MISS){
+          m_col = m_aiCol;
+          m_row = m_aiRow;
+          while(
+            isOnGrid(m_row, m_col) && m_grid[m_row][m_col].getChar() == HIT
+          ){
+            if(isVertical)
+              m_row--;
+            else
+              m_col--;
           }
         }
-      }while(isOnGrid(m_targetRow + rowOffset, m_targetCol + colOffset) && m_grid[m_targetRow + rowOffset][m_targetCol = colOffset].getChar() != BLANK);
-      m_grid[m_targetRow + rowOffset][m_targetCol + colOffset].hitShip();
-      if(targetDirection == 0)
-      {
-        m_targetRow = m_targetRow + rowOffset;
-      }
-      if(targetDirection == 1)
-      {
-        m_targetRow = m_targetRow + rowOffset;
-      }
-      if(targetDirection == 2)
-      {
-        m_targetCol = m_targetCol + colOffset;
-      }
-      if(targetDirection == 3)
-      {
-        m_targetCol = m_targetCol + colOffset;
       }
     }
   }
@@ -238,6 +257,8 @@ void Board::firedAtByAi(int difficulty)
   {
     cout << "AI sunk your ship!\n";
     m_shipsSunk++;
+    m_aiRow = -1;
+    m_aiCol = -1;
   }
 
   if (hasLost())
@@ -509,4 +530,3 @@ char Board::getShipGridChar(int x, int y)
 {
     return m_grid[x][y].getChar();
 }
-
