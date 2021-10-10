@@ -22,7 +22,7 @@ private:
   int numShips;
 
   // Whether it is first player's turn
-  bool p1Turn;
+  bool isP1Turn;
 
   // Whether second player is an AI
   bool hasAi;
@@ -54,7 +54,7 @@ public:
    */
   void playGame();
 
-  void viewScores();
+  void printArena();
 
   /*
    * Is called from main.cpp to start the game

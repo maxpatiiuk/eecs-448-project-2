@@ -74,7 +74,7 @@ public:
    * @param asOpponent whether to view as opponent
    * @return none
    */
-  void viewBoard(bool asOpponent);
+  void viewThisBoard();
 
 
   void viewScores();
@@ -130,7 +130,6 @@ public:
    */
   bool isSunk(int row, int col);
 
-
   /*
    * Checks to see if all ships have been sunk
    * @param None
@@ -138,21 +137,12 @@ public:
    */
   bool hasLost();
 
-  //getter methods
-  int getNumShips()
-  {
-      return m_numShips;
-  };
+  // getters
+  int getNumShips(){ return m_numShips; };
 
-  int getSunkShips()
-  {
-      return m_shipsSunk;
-  };
+  int getSunkShips() { return m_shipsSunk; };
 
-  bool getBoardState(int index);
-
-  bool doScoreboard;
-
+  char getShipGridChar(int x, int y);
 };
 
 #endif
