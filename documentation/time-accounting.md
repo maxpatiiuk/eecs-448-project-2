@@ -35,11 +35,11 @@ An hour-by-hour (per-person) breakdown of time spent on this project.
         </tr>
         <tr>
             <td>Add AI Medium mode</td>
+            <td>2h</td>
             <td>0h</td>
             <td>0h</td>
             <td>0h</td>
-            <td>0h</td>
-            <td>0h</td>
+            <td>2h</td>
         </tr>
         <tr>
             <td>Add AI Hard mode</td>
@@ -91,33 +91,33 @@ An hour-by-hour (per-person) breakdown of time spent on this project.
         </tr>
         <tr>
             <th rowspan=2>Integration</th>
-            <td></td>
-            <td>0h</td>
-            <td>0h</td>
-            <td>0h</td>
-            <td>0h</td>
-            <td>0h</td>
-        </tr>
-        <tr>
-            <td></td>
-            <td>0h</td>
+            <td>Improve documentation</td>
+            <td>1.5h</td>
             <td>0h</td>
             <td>0h</td>
             <td>0h</td>
             <td>0h</td>
         </tr>
         <tr>
-            <th rowspan=2>Testing and Maintenance</th>
             <td>Refactor code</td>
-            <td>2h</td>
+            <td>2.5h</td>
             <td>1h</td>
             <td>0h</td>
             <td>0h</td>
             <td>0h</td>
         </tr>
         <tr>
-            <td>Improve documentation</td>
-            <td>1.5h</td>
+            <th rowspan=2>Testing and Maintenance</th>
+            <td></td>
+            <td>0h</td>
+            <td>0h</td>
+            <td>0h</td>
+            <td>0h</td>
+            <td>0h</td>
+        </tr>
+        <tr>
+            <td>General testing</td>
+            <td>0h</td>
             <td>0h</td>
             <td>0h</td>
             <td>0h</td>
@@ -129,7 +129,7 @@ An hour-by-hour (per-person) breakdown of time spent on this project.
 Total
 
 </th>
-            <td>5h</td>
+            <td>8.5h</td>
             <td>0h</td>
             <td>0h</td>
             <td>0h</td>
