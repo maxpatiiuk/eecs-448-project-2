@@ -86,14 +86,24 @@ void UserInteraction::printArena()
     if(isP1Turn)
     {
         cout
-            << "You've sunk " + to_string(p2Sunk) + " of your enemy's ships\n"
-            << (p2Sunk > p1Sunk ? "You are in the lead!\n" : (p2Sunk < p1Sunk ? "You are losing :(\n" : "It's a draw.\n"))
-            << "This is a " + to_string(numShips) + "-ship game\n";
+            << "You've sunk " << to_string(p2Sunk) << " of your enemy's ships\n"
+            << (p2Sunk > p1Sunk
+                 ? "You are in the lead!\n"
+                 : p2Sunk < p1Sunk
+                 ? "You are losing :(\n"
+                 : "It's a draw.\n")
+            << "This is a " << to_string(numShips) << "-ship game\n";
     } else {
         cout
-            << "You've sunk " + to_string(playerOne->getSunkShips()) + " of your enemy's ships\n"
-            << (p1Sunk > p2Sunk ? "You are in the lead!\n" : (p1Sunk < p2Sunk ? "You are losing :(\n" : "It's a draw.\n"))
-            << "This is a " + to_string(numShips) + "-ship game\n";
+            << "You've sunk "
+            << to_string(playerOne->getSunkShips())
+            << " of your enemy's ships\n"
+            << (p1Sunk > p2Sunk
+                 ? "You are in the lead!\n"
+                 : p1Sunk < p2Sunk
+                 ? "You are losing :(\n"
+                 : "It's a draw.\n")
+            << "This is a " << to_string(numShips) << "-ship game\n";
     }
     cout << "-----------------------------------------------\n";
 }
