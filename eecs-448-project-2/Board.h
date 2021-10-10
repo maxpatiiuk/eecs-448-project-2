@@ -36,6 +36,14 @@ private:
   // Number of ships that have been sunk
   int m_shipsSunk;
 
+  //used by medium difficulty to track status
+  int m_targetRow;
+  int m_targetCol;
+  int originRow;
+  int originCol;
+  bool isTargeting;
+  int targetDirection;
+
   // String to store user input
   string userInput;
 

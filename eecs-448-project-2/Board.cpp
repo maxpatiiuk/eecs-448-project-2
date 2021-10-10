@@ -165,10 +165,61 @@ void Board::firedAtByAi(int difficulty)
       m_row=rand()%ROWS;
       m_col=rand()%COLS;
     } while(m_grid[m_row][m_col].hasBeenHit());
-  else if(difficulty == MEDIUM){
-    // TODO: implement medium difficulty
 
+  else if(difficulty == MEDIUM){
+    if(!isTargeting){
+      do
+      {
+        originRow = rand() % ROWS;
+        originCol = rand() % COLS;
+      } while(m_grid[originRow][originCol].getChar() != BLANK);
+      if(m_grid[originRow][originCol].hitShip())
+      {
+        isTargeting = true;
+        m_targetRow = originRow;
+        m_targetCol = originCol;
+      }
+    } else {
+      int rowOffset = 0;
+      int colOffset = 0;
+      do{
+        targetDirection = rand() % 4;
+        bool isValidDir = false;
+        while(!isValidDir){
+          if(targetDirection == 0){
+            rowOffset -= 1;
+          } 
+          else if(targetDirection == 1){
+            rowOffset += 1;
+          }
+          else if(targetDirection == 2){
+            colOffset -= 1;
+          }
+          else if(targetDirection == 3){
+            colOffset += 1;
+          }
+        }
+      }while(isOnGrid(m_targetRow + rowOffset, m_targetCol + colOffset) && m_grid[m_targetRow + rowOffset][m_targetCol = colOffset].getChar() != BLANK);
+      m_grid[m_targetRow + rowOffset][m_targetCol + colOffset].hitShip();
+      if(targetDirection == 0)
+      {
+        m_targetRow = m_targetRow + rowOffset;
+      }
+      if(targetDirection == 1)
+      {
+        m_targetRow = m_targetRow + rowOffset;
+      }
+      if(targetDirection == 2)
+      {
+        m_targetCol = m_targetCol + colOffset;
+      }
+      if(targetDirection == 3)
+      {
+        m_targetCol = m_targetCol + colOffset;
+      }
+    }
   }
+
   else if(difficulty == HARD)
     for(m_row=0; m_row<ROWS; m_row++)
       for(m_col=0; m_col<COLS; m_col++)
