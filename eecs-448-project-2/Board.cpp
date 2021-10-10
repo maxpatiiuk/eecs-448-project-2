@@ -311,6 +311,7 @@ void Board::promptForCoordinate()
 
 bool Board::checkValidShipPlacement(int shipSize, bool horizontal)
 {
+  {
   validInput = true;
 
   if (horizontal)
@@ -323,21 +324,6 @@ bool Board::checkValidShipPlacement(int shipSize, bool horizontal)
 
     else
     {
-      if (
-        (
-          m_col > 0
-          && m_grid[m_row][m_col-1].isShip()
-        )
-        || ( // Check if no ships to left or right
-         m_col+shipSize < COLS
-         && m_grid[m_row][m_col+shipSize].isShip()
-        )
-      )
-      {
-        validInput = false;
-        invalidCoordMessage = "Cannot place ships adjacent to one another.";
-      }
-
       for (int j = 0; j < shipSize; j++)
       {
         // If another ship takes up this space
@@ -348,33 +334,9 @@ bool Board::checkValidShipPlacement(int shipSize, bool horizontal)
           break;
         }
 
-        // Check no ships above
-        if (m_row > 0)
-        {
-          if (m_grid[m_row-1][m_col+j].isShip())
-          {
-            validInput = false;
-            invalidCoordMessage = "Cannot place ships adjacent to one another.";
-            break;
-          }
-        }
-
-        // Check no ships below
-        if (m_row < ROWS-1)
-        {
-          if (m_grid[m_row+1][m_col+j].isShip())
-          {
-            validInput = false;
-            invalidCoordMessage = "Cannot place ships adjacent to one another.";
-            break;
-          }
-        }
-
       }
     }
-
   }
-
   else
   {
     if ((m_row + shipSize > ROWS))
@@ -382,24 +344,7 @@ bool Board::checkValidShipPlacement(int shipSize, bool horizontal)
       validInput = false;
       invalidCoordMessage = "Ship goes off grid.";
     }
-
     else
-    {
-      if (
-        (
-          m_row > 0
-          && m_grid[m_row-1][m_col].isShip()
-        )
-        || ( // check if no ships on top or below
-          m_row+shipSize < m_row
-          && m_grid[m_row+shipSize][m_col].isShip()
-        )
-      )
-      {
-        validInput = false;
-        invalidCoordMessage = "Cannot place ships adjacent to one another.";
-      }
-
       for (int j = 0; j < shipSize; j++)
       {
         // If another ship takes up this space
@@ -409,40 +354,13 @@ bool Board::checkValidShipPlacement(int shipSize, bool horizontal)
           invalidCoordMessage = "Ships overlap.";
           break;
         }
-
-        // Check no ships left
-        if (m_col > 0)
-        {
-          if (m_grid[m_row+j][m_col-1].isShip())
-          {
-            validInput = false;
-            invalidCoordMessage = "Cannot place ships adjacent to one another.";
-            break;
-          }
-        }
-
-        // Check no ships right
-        if (m_col < COLS-1)
-        {
-          if (m_grid[m_row+j][m_col+1].isShip())
-          {
-            validInput = false;
-            invalidCoordMessage = "Cannot place ships adjacent to one another.";
-            break;
-          }
-        }
-
       }
     }
   }
-
-  if (!validInput)
-  {
+  if (!validInput){
     cout << "ERROR: " << invalidCoordMessage << "\n\n";
   }
-
   return validInput;
-
 }
 
 bool Board::isOnGrid(int row, int col)
