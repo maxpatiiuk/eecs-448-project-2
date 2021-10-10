@@ -13,12 +13,6 @@ using namespace std;
 class Ship
 {
 private:
-  /*
-   * Changes to BLANK when it is placed, changes to HIT when it is hit
-   * @param None
-   * @returns character value based on hit or placement
-   */
-  char m_char;
 
   int shipSize;
 

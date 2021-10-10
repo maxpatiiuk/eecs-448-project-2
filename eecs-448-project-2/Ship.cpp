@@ -2,7 +2,6 @@
 
 Ship::Ship()
 {
-  m_char = BLANK;
   m_isShip = false;
   m_hasBeenHit = false;
   m_isHorizontal = true;
@@ -15,7 +14,6 @@ void Ship::placeShip()
   if (m_isShip == false)
   {
     m_isShip = true;
-    m_char = SHIP;
   }
 }
 
@@ -25,7 +23,6 @@ bool Ship::hitShip()
     return false;
 
   m_hasBeenHit = true;
-  m_char = m_isShip ? HIT : MISS;
   return true;
 }
 
@@ -46,7 +43,16 @@ bool Ship::isHorizontal()
 
 char Ship::getChar()
 {
-  return m_char;
+  if(m_hasBeenHit)
+    if(m_isShip)
+      return HIT;
+    else
+      return MISS;
+  else
+    if(m_isShip)
+      return SHIP;
+    else
+      return BLANK;
 }
 
 bool Ship::hasBeenHit()
