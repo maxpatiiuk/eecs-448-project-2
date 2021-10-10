@@ -3,8 +3,8 @@
 
 #include <cstdlib>
 #include <limits>
-#include "Board.h"
 #include <iostream>
+#include "Board.h"
 
 using namespace std;
 

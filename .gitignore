@@ -1,4 +1,4 @@
 node_modules
-docs-gen
+docs-gen/
 *.o
 Battleship
