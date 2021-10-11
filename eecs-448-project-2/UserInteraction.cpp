@@ -147,10 +147,68 @@ void UserInteraction::playGame()
     if(hasAi && currentPlayer == 2)
       opponent->firedAtByAi(aiDifficulty);
     else {
-      system("clear");
-      printArena();
-      opponent->fireAt();
-      cin.ignore();
+     if(currentPlayer == 1)
+		{	
+		  int choose;
+		  system("clear");
+		  printArena();
+		  
+		  if(specShot1 > 0)
+		  {
+			  cout << "1. Speical Shots\n";
+			  cout << "2. Normal Shot\n";
+			  choose = promptForInt(1, 2);
+			  if(choose == 1)
+			  {
+				specShot1 = specShot1-1;
+				opponent->fireAtThree();
+				cin.ignore();
+			  }
+			  if(choose == 2)
+			  {	
+				 opponent->fireAt();
+				 cin.ignore();
+			  }
+		  }
+		  else
+		  {
+			    opponent->fireAt();
+                 cin.ignore();
+
+          }			  
+		}
+		
+	    if(currentPlayer == 2)
+		{	
+		  int choose;
+		  system("clear");
+		  printArena();
+		  
+		  if(specShot2 > 0)
+		  {
+			  cout << "1. Speical Shots\n";
+			  cout << "2. Normal Shot\n";
+			  choose = promptForInt(1, 2);
+			  if(choose == 1)
+			  {
+				specShot2 = specShot2-1;
+				opponent->fireAtThree();
+				cin.ignore();
+			  }
+			  if(choose == 2)
+			  {	
+				 opponent->fireAt();
+				 cin.ignore();
+			  }
+		  }
+		  else
+		  {
+			    opponent->fireAt();
+                 cin.ignore();
+
+          }			  
+		}
+		
     }
 
     cout << "\nPress ENTER to Continue ";

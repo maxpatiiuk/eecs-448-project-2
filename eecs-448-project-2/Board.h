@@ -112,6 +112,13 @@ public:
    * @returns none
    */
   void fireAt();
+  
+    /*
+   * User chooses coordinates to shoota 3x3 shot
+   * @param None
+   * @returns none
+   */
+  void fireAtThree();
 
   /*
    * Board is being shot at by an AI

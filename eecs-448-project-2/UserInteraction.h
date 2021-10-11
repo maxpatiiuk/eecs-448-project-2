@@ -29,6 +29,11 @@ private:
 
   // AI difficulty (between 1 and 3)
   int aiDifficulty;
+  
+    //player 1 special shot count
+  int specShot1 = 1;
+  //player 2 special shot count
+  int specShot2 = 1;
 
 public:
   /*

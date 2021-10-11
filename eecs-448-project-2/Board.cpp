@@ -160,6 +160,47 @@ void Board::fireAt()
   }
 }
 
+void Board::fireAtThree()
+{
+	 promptForCoordinate();
+	
+	for(int i = m_row-1; i <= m_row +1; i ++ )
+	{
+		for(int j = m_col-1; j <= m_col+1; j ++)
+		{
+			
+			if (m_grid[i][j].hitShip()) // checks if spot has been previously hit
+			{
+			  if (m_grid[i][j].hasBeenHit() && m_grid[i][j].isShip()) // if spot hit contained a ship
+			  {
+				m_grid[i][j].hitShip();
+				cout << "You hit an enemy ship!\n";
+
+				if (isSunk(i, j))
+				{
+				  cout << "You have sunk an enemy ship!\n";
+				  m_shipsSunk++;
+				}
+
+				if (hasLost())
+				{
+				  cout << "You have sunk all of your enemy's ships!\n";
+				}
+			  }
+			  else // if spot hit did not contain a ship
+			  {
+				cout << "\nYou missed.\n";
+			  }
+			}
+			else
+			{
+			  cout << "This spot has already bit hit. Try again.\n";
+			}
+		}
+	}	
+}	
+
+
 void Board::firedAtByAi(int difficulty)
 {
   if(difficulty == EASY)
