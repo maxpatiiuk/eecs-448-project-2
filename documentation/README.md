@@ -85,11 +85,12 @@ Documentation will then be found in the `./documentation/docs-gen` directory.
 Tools used in the process of development
 
 - Git
-- pre-commit.com
 - GitHub
 - Vim
 - PyCharm
 - Visual Studio CODE
+- Doxygen
+- [Doxygen Awesone](https://www.doxygen.nl/manual/doxygen_usage.html)
 
 ## Licence
 
