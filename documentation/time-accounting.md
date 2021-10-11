@@ -94,7 +94,7 @@ An hour-by-hour (per-person) breakdown of time spent on this project.
             <td>Improve documentation</td>
             <td>1.5h</td>
             <td>0h</td>
-            <td>0h</td>
+            <td>.5h</td>
             <td>0h</td>
             <td>0h</td>
         </tr>
@@ -119,7 +119,7 @@ An hour-by-hour (per-person) breakdown of time spent on this project.
             <td>General testing</td>
             <td>0h</td>
             <td>0h</td>
-            <td>0h</td>
+            <td>1h</td>
             <td>0h</td>
             <td>0h</td>
         </tr>
@@ -131,7 +131,7 @@ Total
 </th>
             <td>9.25h</td>
             <td>0h</td>
-            <td>0h</td>
+            <td>7.5h</td>
             <td>0h</td>
             <td>0h</td>
         </tr>
