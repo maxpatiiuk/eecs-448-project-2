@@ -68,7 +68,7 @@ An hour-by-hour (per-person) breakdown of time spent on this project.
         <tr>
             <td>Add Scoreboard</td>
             <td>0h</td>
-            <td>.5h</td>
+            <td>0.5h</td>
             <td>0h</td>
             <td>0h</td>
             <td>0h</td>
@@ -100,7 +100,7 @@ An hour-by-hour (per-person) breakdown of time spent on this project.
         </tr>
         <tr>
             <td>Refactor code</td>
-            <td>2.5h</td>
+            <td>3.25h</td>
             <td>1h</td>
             <td>0h</td>
             <td>0h</td>
@@ -129,7 +129,7 @@ An hour-by-hour (per-person) breakdown of time spent on this project.
 Total
 
 </th>
-            <td>8.5h</td>
+            <td>9.25h</td>
             <td>0h</td>
             <td>0h</td>
             <td>0h</td>
