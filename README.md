@@ -1,5 +1,8 @@
 # Project 2: Battleship
 
+![](documentation/screencap/sc1.png)
+![](documentation/screencap/sc2.png)
+
 ## Group 5 - EECS 448
 
 This program contains a two player battleship game written in C++.

@@ -58,24 +58,15 @@ make
 make clean
 ```
 
-### (Optional) Pre-commit hooks
-
-This project uses pre-commit.com hooks, which run code linters and validators
-before every commit. Instructions for configuring pre-commit hooks can be found
-in [.pre-commit-config.yaml](../.pre-commit-config.yaml)
-
-Besides, pre-commit, you would need to install development dependencies for all
-hooks to work properly:
-
-```zsh
-npm i  # install development dependencies
-```
-
 ## Documentation Generation
 
+```zsh
+cd ./documentation
+
+doxygen ./documentation/Doxyfile
 ```
-NEED TO ADD DOCUMENTATION GENERATION INSTRUCTIONS
-```
+
+Documentation will then be found in the `./documentation/docs-gen` directory.
 
 ## Works Cited
 
