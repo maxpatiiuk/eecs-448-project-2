@@ -24,12 +24,3 @@ program stops running.
 ## Deployment and Documentation
 
 See the docs in the [documentation directory](./documentation/)
-
-## File Explanations
-
-- **Documentation**: This folder contains the proper HTML Documentation as well
-  as a works cited page
-- **TeamInfo**: This folder contains the team's contract, notes, and the time
-  logging for the project
-- **Code Files**: The remaining files are split up by classes and a brief
-  description of each file can be seen when it is opened
