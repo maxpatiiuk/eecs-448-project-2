@@ -39,7 +39,7 @@ Ship
 Clone this repository
 
 ```zsh
-git clone https://github.com/maxxxxxdlp/eecs-448-project-2
+git clone https://github.com/maxpatiiuk/eecs-448-project-2
 ```
 
 A makefile must be used to make the program.
