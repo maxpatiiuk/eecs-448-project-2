@@ -151,6 +151,7 @@ void Board::fireAt()
     {
       cout << "You have sunk an enemy ship!\n";
       m_shipsSunk++;
+      m_radarCharges++;
     }
 
     if (hasLost())
@@ -257,6 +258,7 @@ void Board::firedAtByAi(int difficulty)
   {
     cout << "AI sunk your ship!\n";
     m_shipsSunk++;
+    m_radarCharges++;
     m_aiRow = -1;
     m_aiCol = -1;
   }
@@ -266,8 +268,39 @@ void Board::firedAtByAi(int difficulty)
 
 }
 
+void Board::promptRadar(){
+  char input = '\0';
+  int rRow = 0; //Temp vars to store a ship tile
+  int rCol = 0;
+  cout << "You have " << m_radarCharges << " radar charges available. Want to use one [Y/N]? ";
+  cin >> input;
+
+  while(toupper(input) != 'Y' && toupper(input) != 'N'){
+    cout << "Invalid Option. Want to use a radar charge [Y/N]? ";
+    cin >> input;
+  }
+
+  if (toupper(input) == 'Y'){
+    srand(time(nullptr));
+    while(true){
+      rRow = rand() % ROWS;
+      rCol = rand() % COLS;
+      if(m_grid[rRow][rCol].getChar() == SHIP){
+        cout << "A ship has been detected at " << (char) (rCol + 65) << rRow + 1 <<".\n";
+        break;
+      } 
+    }
+    m_radarCharges--;
+  }
+
+}
+
 void Board::promptForCoordinate()
 {
+
+  if(m_radarCharges > 0)
+    promptRadar();
+
   validInput = false;
   do
   {

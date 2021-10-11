@@ -43,6 +43,9 @@ private:
   int m_aiRow;
   int m_aiCol;
 
+  // Stores how many radar charges left
+  int m_radarCharges;
+
   // String to store user input
   string userInput;
 
@@ -136,12 +139,19 @@ public:
    */
   bool hasLost();
 
+  /**
+   * Prompts user to 
+   */
+  void promptRadar();
+
   // getters
   int getNumShips(){ return m_numShips; };
 
   int getSunkShips() { return m_shipsSunk; };
 
   char getShipGridChar(int x, int y);
+
+  void incrememtRadarCharge(){ m_radarCharges++; };
 };
 
 #endif
