@@ -115,6 +115,13 @@ public:
    * @returns none
    */
   void fireAt();
+  
+  /*
+   * User chooses coordinates to shoot a 3x3 shot
+   * @param None
+   * @returns none
+   */
+  void fireAtThree();
 
   /*
    * Board is being shot at by an AI
@@ -151,7 +158,9 @@ public:
 
   char getShipGridChar(int x, int y);
 
-  void incrememtRadarCharge(){ m_radarCharges++; };
+
+  bool hasSpecialShot1 = true;
+  bool hasSpecialShot2 = true;
 };
 
 #endif

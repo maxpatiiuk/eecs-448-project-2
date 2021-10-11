@@ -42,70 +42,47 @@ int UserInteraction::promptForInt(int min, int max)
 
 void UserInteraction::printArena()
 {
-    Board* playerOne = player1;
-    Board* playerTwo = player2;
-    int p1Sunk = playerOne->getSunkShips();
-    int p2Sunk = playerTwo->getSunkShips();
+    Board *player = isP1Turn ? player1 : player2;
+    Board *opponent = isP1Turn ? player2 : player1;
+    int currentPlayer = isP1Turn ? 1 : 2;
 
     cout
-        << "It is "
-        << (isP1Turn ? "Player 1" : "Player 2")
-        << "'s Turn\n"
-        << "-----------------------------------------------\n"
-        << "|       PLAYER         |        OPPONENT      |\n"
-        << "|---------------------------------------------|\n"
-        << "|  A B C D E F G H I J |  A B C D E F G H I J |\n";
+      << "It is Player " << currentPlayer << "'s Turn\n"
+      << "-----------------------------------------------\n"
+      << "|       PLAYER         |        OPPONENT      |\n"
+      << "|---------------------------------------------|\n"
+      << "|  A B C D E F G H I J |  A B C D E F G H I J |\n";
 
     for(int x = 0; x < ROWS; x++)
     {
-        cout << '|' << x + 1 << ' ';
-        for(int y = 0; y < COLS; y++)
-        {
-            if(!isP1Turn && playerOne->getShipGridChar(x,y) == SHIP)
-                // Hide enemy ships
-                cout << BLANK;
-            else
-                cout << playerOne->getShipGridChar(x,y);
-          cout << ' ';
-        }
+      cout << '|' << x + 1 << ' ';
+      for(int y = 0; y < COLS; y++)
+        cout << player->getShipGridChar(x,y) << ' ';
 
-        cout << '|' << x + 1 << ' ';
-        for(int y = 0; y < COLS; y++) {
-            if(isP1Turn && playerTwo->getShipGridChar(x,y) == SHIP)
-                // Hide enemy ships
-                cout << BLANK;
-            else
-                cout << playerTwo->getShipGridChar(x,y);
-            cout << ' ';
-        }
-        cout << "|\n";
+      cout << '|' << x + 1 << ' ';
+      for(int y = 0; y < COLS; y++) {
+        if(opponent->getShipGridChar(x,y) == SHIP)
+          // Hide enemy ships
+          cout << BLANK;
+        else
+          cout << opponent->getShipGridChar(x,y);
+        cout << ' ';
+      }
+      cout << "|\n";
     }
 
-    cout << "-----------------------------------------------\n";
-
-    if(isP1Turn)
-    {
-        cout
-            << "You've sunk " << to_string(p2Sunk) << " of your enemy's ships\n"
-            << (p2Sunk > p1Sunk
-                 ? "You are in the lead!\n"
-                 : p2Sunk < p1Sunk
-                 ? "You are losing :(\n"
-                 : "It's a draw.\n")
-            << "This is a " << to_string(numShips) << "-ship game\n";
-    } else {
-        cout
-            << "You've sunk "
-            << to_string(playerOne->getSunkShips())
-            << " of your enemy's ships\n"
-            << (p1Sunk > p2Sunk
-                 ? "You are in the lead!\n"
-                 : p1Sunk < p2Sunk
-                 ? "You are losing :(\n"
-                 : "It's a draw.\n")
-            << "This is a " << to_string(numShips) << "-ship game\n";
-    }
-    cout << "-----------------------------------------------\n";
+    int playerSunkShip = player->getSunkShips();
+    int opponentSunkShip = opponent->getSunkShips();
+    cout
+      << "-----------------------------------------------\n"
+      << "You've sunk " << playerSunkShip << " of your enemy's ships\n"
+      << (playerSunkShip > opponentSunkShip
+        ? "You are in the lead!\n"
+        : playerSunkShip < opponentSunkShip
+        ? "You are losing :(\n"
+        : "It's a draw.\n")
+      << "This is a " << numShips << "-ship game\n"
+      << "-----------------------------------------------\n";
 }
 
 
@@ -147,13 +124,49 @@ void UserInteraction::playGame()
     if(hasAi && currentPlayer == 2)
       opponent->firedAtByAi(aiDifficulty);
     else {
+      int choice;
       system("clear");
       printArena();
-      opponent->fireAt();
-      cin.ignore();
+      if(currentPlayer == 1){
+
+        if(player->hasSpecialShot1){
+          cout << "1. Normal Shot\n";
+          cout << "2. Special Shots\n";
+          choice = promptForInt(1, 2);
+        }
+        else
+          choice = 1;
+
+        if(choice == 2){
+          player->hasSpecialShot1 = false;
+          opponent->fireAtThree();
+        }
+        else
+          opponent->fireAt();
+      }
+	    system("clear");
+      printArena();
+	   if(currentPlayer == 2){
+
+        if(player->hasSpecialShot2){
+          cout << "1. Normal Shot\n";
+          cout << "2. Special Shots\n";
+          choice = promptForInt(1, 2);
+        }
+        else
+          choice = 1;
+
+        if(choice == 2){
+          player->hasSpecialShot2 = false;
+          opponent->fireAtThree();
+        }
+        else
+          opponent->fireAt();
+      }
     }
 
     cout << "\nPress ENTER to Continue ";
+    cin.ignore();
     cin.ignore();
 
   }

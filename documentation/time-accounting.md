@@ -68,39 +68,47 @@ An hour-by-hour (per-person) breakdown of time spent on this project.
         <tr>
             <td>Add Scoreboard</td>
             <td>0h</td>
+            <td>0.5h</td>
+            <td>0h</td>
+            <td>0h</td>
+            <td>0h</td>
+        </tr>
+        <tr>
+            <td>Add Special Shot</td>
+            <td>0h</td>
+            <td>0h</td>
+            <td>5h</td>
+            <td>0h</td>
+            <td>0h</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>0h</td>
+            <td>0h</td>
+            <td>0h</td>
+            <td>0h</td>
+            <td>0h</td>
+        </tr>
+        <tr>
+            <th rowspan=3>Integration</th>
+            <td>Improve documentation</td>
+            <td>1.5h</td>
+            <td>.5h</td>
+            <td>.5h</td>
+            <td>0h</td>
+            <td>0h</td>
+        </tr>
+        <tr>
+            <td>Migrate to Doxy-Awesome</td>
+            <td>0</td>
             <td>.5h</td>
             <td>0h</td>
             <td>0h</td>
             <td>0h</td>
         </tr>
         <tr>
-            <td></td>
-            <td>0h</td>
-            <td>0h</td>
-            <td>0h</td>
-            <td>0h</td>
-            <td>0h</td>
-        </tr>
-        <tr>
-            <td></td>
-            <td>0h</td>
-            <td>0h</td>
-            <td>0h</td>
-            <td>0h</td>
-            <td>0h</td>
-        </tr>
-        <tr>
-            <th rowspan=2>Integration</th>
-            <td>Improve documentation</td>
-            <td>1.5h</td>
-            <td>0h</td>
-            <td>0h</td>
-            <td>0h</td>
-            <td>0h</td>
-        </tr>
-        <tr>
             <td>Refactor code</td>
-            <td>2.5h</td>
+            <td>3.25h</td>
             <td>1h</td>
             <td>0h</td>
             <td>0h</td>
@@ -118,8 +126,8 @@ An hour-by-hour (per-person) breakdown of time spent on this project.
         <tr>
             <td>General testing</td>
             <td>0h</td>
-            <td>0h</td>
-            <td>0h</td>
+            <td>1h</td>
+            <td>1h</td>
             <td>0h</td>
             <td>0h</td>
         </tr>
@@ -129,9 +137,9 @@ An hour-by-hour (per-person) breakdown of time spent on this project.
 Total
 
 </th>
+            <td>9.25h</td>
             <td>8.5h</td>
-            <td>0h</td>
-            <td>0h</td>
+            <td>7.5h</td>
             <td>0h</td>
             <td>0h</td>
         </tr>
