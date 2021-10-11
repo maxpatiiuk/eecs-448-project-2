@@ -150,7 +150,8 @@ public:
 
   char getShipGridChar(int x, int y);
 
-  bool hasSpecialShot = true;
+  bool hasSpecialShot1 = true;
+  bool hasSpecialShot2 = true;
 };
 
 #endif

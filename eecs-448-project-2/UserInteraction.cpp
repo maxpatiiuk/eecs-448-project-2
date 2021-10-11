@@ -129,18 +129,7 @@ void UserInteraction::playGame()
       printArena();
       if(currentPlayer == 1){
 
-        if(player->hasSpecialShot){
-          cout << "1. Normal Shot\n";
-          cout << "2. Special Shots\n";
-          choice = promptForInt(1, 2);
-        }
-    else {
-      int choice;
-      system("clear");
-      printArena();
-      if(currentPlayer == 1){
-
-        if(player->hasSpecialShot){
+        if(player->hasSpecialShot1){
           cout << "1. Normal Shot\n";
           cout << "2. Special Shots\n";
           choice = promptForInt(1, 2);
@@ -149,7 +138,7 @@ void UserInteraction::playGame()
           choice = 1;
 
         if(choice == 2){
-          player->hasSpecialShot = false;
+          player->hasSpecialShot1 = false;
           opponent->fireAtThree();
         }
         else
@@ -159,7 +148,7 @@ void UserInteraction::playGame()
       printArena();
 	   if(currentPlayer == 2){
 
-        if(player->hasSpecialShot){
+        if(player->hasSpecialShot2){
           cout << "1. Normal Shot\n";
           cout << "2. Special Shots\n";
           choice = promptForInt(1, 2);
@@ -168,7 +157,7 @@ void UserInteraction::playGame()
           choice = 1;
 
         if(choice == 2){
-          player->hasSpecialShot = false;
+          player->hasSpecialShot2 = false;
           opponent->fireAtThree();
         }
         else
