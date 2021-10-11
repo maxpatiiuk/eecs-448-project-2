@@ -74,14 +74,19 @@ public:
    * @param bool isHorizontal
    */
   void setOrientation(bool isHorizontal);
-
+  /**
+   * Sets the size of the ship.
+   * @param size Size to set the ship 
+   */
   void setSize(int size);
 
+  //Returns ship size
   int getSize()
   {
       return shipSize;
   }
 
+  //Returns whether or not the ship is horizontal
   bool isHorizontal();
 
   /*
@@ -90,8 +95,10 @@ public:
    */
   char getChar();
 
+  // Returns if the ship has been hit
   bool hasBeenHit();
 
+  // Returns if the tile is a ship
   bool isShip();
 };
 

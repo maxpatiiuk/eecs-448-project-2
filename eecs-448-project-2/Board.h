@@ -78,7 +78,7 @@ public:
    */
   void viewThisBoard();
 
-
+  //Displays score
   void viewScores();
 
   /*
@@ -130,6 +130,7 @@ public:
    */
   void firedAtByAi(int difficulty);
 
+  //Checks to see if a coordinate is on the board
   bool isOnGrid(int row, int col);
 
   /*
@@ -147,15 +148,17 @@ public:
   bool hasLost();
 
   /**
-   * Prompts user to 
+   * Prompts user to use a radar charge, and outputs a random tile with a ship on it. 
    */
   void promptRadar();
 
-  // getters
+  //Returns the number of ships
   int getNumShips(){ return m_numShips; };
 
+  //Returns the number of ships sunk
   int getSunkShips() { return m_shipsSunk; };
 
+  //Gets the char of a given tile
   char getShipGridChar(int x, int y);
 
 

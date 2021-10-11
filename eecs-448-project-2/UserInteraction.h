@@ -54,6 +54,7 @@ public:
    */
   void playGame();
 
+  //Displays the game boards
   void printArena();
 
   /*
