@@ -113,8 +113,8 @@ public:
    */
   void fireAt();
   
-    /*
-   * User chooses coordinates to shoota 3x3 shot
+  /*
+   * User chooses coordinates to shoot a 3x3 shot
    * @param None
    * @returns none
    */
@@ -149,6 +149,8 @@ public:
   int getSunkShips() { return m_shipsSunk; };
 
   char getShipGridChar(int x, int y);
+
+  bool hasSpecialShot = true;
 };
 
 #endif
