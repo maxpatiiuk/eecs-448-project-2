@@ -77,7 +77,7 @@ An hour-by-hour (per-person) breakdown of time spent on this project.
             <td>Add Special Shot</td>
             <td>0h</td>
             <td>0h</td>
-            <td>0h</td>
+            <td>5h</td>
             <td>0h</td>
             <td>0h</td>
         </tr>
