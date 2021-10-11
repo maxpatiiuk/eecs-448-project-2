@@ -155,7 +155,7 @@ void UserInteraction::playGame()
 		  
 		  if(specShot1 > 0)
 		  {
-			  cout << "1. Speical Shots\n";
+			  cout << "1. Speical Shots availble: " << specShot1 << "\n";
 			  cout << "2. Normal Shot\n";
 			  choose = promptForInt(1, 2);
 			  if(choose == 1)
@@ -172,8 +172,9 @@ void UserInteraction::playGame()
 		  }
 		  else
 		  {
-			    opponent->fireAt();
-                 cin.ignore();
+			 cout << "No more special shots available\n";
+			opponent->fireAt();
+			 cin.ignore();
 
           }			  
 		}
@@ -186,7 +187,7 @@ void UserInteraction::playGame()
 		  
 		  if(specShot2 > 0)
 		  {
-			  cout << "1. Speical Shots\n";
+			  cout << "1. Speical Shots availble: " << specShot2 << "\n";
 			  cout << "2. Normal Shot\n";
 			  choose = promptForInt(1, 2);
 			  if(choose == 1)
@@ -203,8 +204,9 @@ void UserInteraction::playGame()
 		  }
 		  else
 		  {
-			    opponent->fireAt();
-                 cin.ignore();
+			cout << "No more special shots available\n";
+			opponent->fireAt();
+            cin.ignore();
 
           }			  
 		}
